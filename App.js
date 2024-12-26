@@ -40,12 +40,17 @@ export default function App() {
   };
 
   function addGoalHandler(enteredGoal) {
-    setGoals((currentGoals) => [
-      ...currentGoals,
-      { id: Math.random().toString(), text: enteredGoal },
-    ]);
+    setGoals((currentGoals) => {
+      const updatedGoals = [
+        ...currentGoals,
+        { id: Math.random().toString(), text: enteredGoal },
+      ];
+      storeData(updatedGoals);
+      return updatedGoals; 
+    });
     endAddGoalHandler();
   }
+
   function startAddGoalHandler() {
     setModalVisible(true);
   }
@@ -58,7 +63,7 @@ export default function App() {
     setGoals((currentGoals) =>
       currentGoals.filter((goal) => goal.id !== goalId)
     );
-    storeData(goals);
+
   }
 
   return (
